@@ -33,31 +33,33 @@ $(function() {
             $(element).append('<p class="search-result">'+ findMatches(inputvalue)[i]+'</p>')
         }
     }
-   
     
     $("input").each(function(){
         this.addEventListener('keyup', function(){
 
             if(($(this).val().length)>=2){
-                console.log("2 or greater");
-                console.log(findMatches($(this).val()));
 
                 if($(this).hasClass("from")){
+                    console.log("from block");
                     $(".from-div").empty();
                     appendData($(this).val(),".from-div")
-                    // console.log("from block");
+                    var self = this;
+                    $(".search-result").click(function(){
+                        $(self).val($(this).text());
+                        $(".from-div").empty();
+                    });
                 }
                 else{
+                    console.log("to block");
                     $(".to-div").empty();
                     appendData($(this).val(),".to-div")
-                    console.log("to block");
+                    var self = this;
+                    $(".search-result").click(function(){
+                        $(self).val($(this).text());
+                        $(".to-div").empty();
+                    });
                 }
-
-                $(".search-result").click(function(){
-                    console.log($(this).text());
-                  });
             }
-
         });
       });
 
