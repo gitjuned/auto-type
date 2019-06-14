@@ -24,22 +24,20 @@ $(function() {
         "Bilaspur","Srinagar"
     ]
 
-
     function findMatches(wordToMatch){
         return cities.filter(item => item.toLowerCase().includes(wordToMatch.toLowerCase()))
     }
 
     function appendData(inputvalue,element){
         for(var i=0; i<findMatches(inputvalue).length;i++){
-            $(element).append('<p>'+ findMatches(inputvalue)[i]+'</p>')
+            $(element).append('<p class="search-result">'+ findMatches(inputvalue)[i]+'</p>')
         }
     }
    
     
-
     $("input").each(function(){
         this.addEventListener('keyup', function(){
-            
+
             if(($(this).val().length)>=2){
                 console.log("2 or greater");
                 console.log(findMatches($(this).val()));
@@ -54,20 +52,14 @@ $(function() {
                     appendData($(this).val(),".to-div")
                     console.log("to block");
                 }
+
+                $(".search-result").click(function(){
+                    console.log($(this).text());
+                  });
             }
+
         });
       });
-
-      // if($(this).hasClass("from")){
-    //     console.log("from");
-    // }
-    // else{
-    //     console.log("to");
-    // }
-
-    //   $(".from").after('<b>Hello</b>');
-
-
 
    
 }); // DOCUMENT READY
