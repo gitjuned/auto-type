@@ -28,31 +28,45 @@ $(function() {
     function findMatches(wordToMatch){
         return cities.filter(item => item.toLowerCase().includes(wordToMatch.toLowerCase()))
     }
-    // for(var i=0; i<findMatches('na').length;i++){
-    //     console.log(findMatches("na")[i]);
-    // }
+
+    function appendData(inputvalue,element){
+        for(var i=0; i<findMatches(inputvalue).length;i++){
+            $(element).append('<p>'+ findMatches(inputvalue)[i]+'</p>')
+        }
+    }
+   
+    
 
     $("input").each(function(){
-        console.log(this);
         this.addEventListener('keyup', function(){
-            if($(this).hasClass("from")){
-                console.log("from");
-            }
+            
+            if(($(this).val().length)>=2){
+                console.log("2 or greater");
+                console.log(findMatches($(this).val()));
 
-            // console.log(this);
-            console.log($(this).val());
+                if($(this).hasClass("from")){
+                    $(".from-div").empty();
+                    appendData($(this).val(),".from-div")
+                    // console.log("from block");
+                }
+                else{
+                    $(".to-div").empty();
+                    appendData($(this).val(),".to-div")
+                    console.log("to block");
+                }
+            }
         });
       });
 
+      // if($(this).hasClass("from")){
+    //     console.log("from");
+    // }
+    // else{
+    //     console.log("to");
+    // }
 
+    //   $(".from").after('<b>Hello</b>');
 
-    // $("input").keyup(function(){
-    //     alert("The text has been changed.");
-    //   });
-    // console.log(findMatches("as"));
-
-
-    // $("#from").after( "<b>Hello</b>" );
 
 
    
