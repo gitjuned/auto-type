@@ -23,6 +23,7 @@ $(function() {
         "Tanda","Amritsar","Raipur","Pilani",
         "Bilaspur","Srinagar"
     ]
+    
     // var data2 =[];
     // data2 = cities.filter(function(item){
     //      return item !== 'Srinagar'
@@ -47,6 +48,7 @@ $(function() {
                 if($(this).hasClass("from")){
                     console.log("from block");
                     $(".from-div").empty();
+
                     appendData($(this).val(),".from-div")
                     var self = this;
                     $(".search-result").click(function(e){
