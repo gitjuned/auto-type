@@ -23,22 +23,19 @@ $(function() {
         "Tanda","Amritsar","Raipur","Pilani",
         "Bilaspur","Srinagar"
     ]
-    
-    // var data2 =[];
-    // data2 = cities.filter(function(item){
-    //      return item !== 'Srinagar'
-    // })
+    filteredCities = [...cities];
 
-    // console.log("data2");
-    // console.log(data2);
-    
+    var toValue = $(".to").val();
+    var fromValue = $(".from").val();
+
+
     function findMatches(wordToMatch){
-        return cities.filter(item => item.toLowerCase().includes(wordToMatch.toLowerCase()))
+        return filteredCities.filter(item => item.toLowerCase().includes(wordToMatch.toLowerCase()));
     }
 
     function appendData(inputvalue,element){
         for(var i=0; i<findMatches(inputvalue).length;i++){
-            $(element).append('<p class="search-result">'+ findMatches(inputvalue)[i]+'</p>')
+            $(element).append('<p class="search-result">'+ findMatches(inputvalue)[i]+'</p>');
         }
     }
     
@@ -48,33 +45,61 @@ $(function() {
                 if($(this).hasClass("from")){
                     console.log("from block");
                     $(".from-div").empty();
-
-                    appendData($(this).val(),".from-div")
+                    appendData($(this).val(),".from-div");
                     var self = this;
                     $(".search-result").click(function(e){
                         $(self).val($(this).text());
+                        console.log('filteredCities', filteredCities);
+                        filteredCities = filteredCities.filter(e => e !== $(this).text())
+                        // console.log(cities);
+                        console.log('after filteredCities', filteredCities);
+
                         $(".from-div").empty();
                         e.stopPropagation();
                     });
+                    console.log('$(this).val()', $(this).val().length);
+                    if($(this).val().length < 3){
+                        console.log('inside length');
+                        filteredCities = [...cities];
+                        filteredCities = filteredCities.filter(e => e !== $('.to').val());
+                    }
                 }
                 else{
                     console.log("to block");
                     $(".to-div").empty();
                     appendData($(this).val(),".to-div")
                     var self = this;
-                    $(".search-result").click(function(){
+                    $(".search-result").click(function(e){
                         $(self).val($(this).text());
+                        filteredCities = filteredCities.filter(e => e !== $(this).text())
+                        // cities = cities.filter(e => e !== $(this).text())
+                        // console.log(cities);
+
                         $(".to-div").empty();
                         e.stopPropagation();
                     });
+
+                    if($(this).val().length < 3){
+                        filteredCities = [...cities];
+                        filteredCities = filteredCities.filter(e => e !== $('.from').val());
+                    }
                 }
             }
         });
       });
 
       $(document).click(function(){
-        $("p").hide();
-    });
+        $(".search-result").hide();
+        });
 
    
 }); // DOCUMENT READY
+
+
+
+// var data2 =[];
+// data2 = cities.filter(function(item){
+//      return item !== 'Srinagar'
+// })
+// console.log("data2");
+// console.log(data2);
