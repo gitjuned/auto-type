@@ -23,11 +23,7 @@ $(function() {
         "Tanda","Amritsar","Raipur","Pilani",
         "Bilaspur","Srinagar"
     ]
-    filteredCities = [...cities];
-
-    var toValue = $(".to").val();
-    var fromValue = $(".from").val();
-
+    var filteredCities = [...cities];
 
     function findMatches(wordToMatch){
         return filteredCities.filter(item => item.toLowerCase().includes(wordToMatch.toLowerCase()));
@@ -49,17 +45,11 @@ $(function() {
                     var self = this;
                     $(".search-result").click(function(e){
                         $(self).val($(this).text());
-                        console.log('filteredCities', filteredCities);
                         filteredCities = filteredCities.filter(e => e !== $(this).text())
-                        // console.log(cities);
-                        console.log('after filteredCities', filteredCities);
-
                         $(".from-div").empty();
                         e.stopPropagation();
                     });
-                    console.log('$(this).val()', $(this).val().length);
                     if($(this).val().length < 3){
-                        console.log('inside length');
                         filteredCities = [...cities];
                         filteredCities = filteredCities.filter(e => e !== $('.to').val());
                     }
@@ -72,9 +62,6 @@ $(function() {
                     $(".search-result").click(function(e){
                         $(self).val($(this).text());
                         filteredCities = filteredCities.filter(e => e !== $(this).text())
-                        // cities = cities.filter(e => e !== $(this).text())
-                        // console.log(cities);
-
                         $(".to-div").empty();
                         e.stopPropagation();
                     });
@@ -88,18 +75,9 @@ $(function() {
         });
       });
 
-      $(document).click(function(){
+    $(document).click(function(){
         $(".search-result").hide();
-        });
+    });
 
    
 }); // DOCUMENT READY
-
-
-
-// var data2 =[];
-// data2 = cities.filter(function(item){
-//      return item !== 'Srinagar'
-// })
-// console.log("data2");
-// console.log(data2);
