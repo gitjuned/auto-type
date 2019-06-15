@@ -23,7 +23,14 @@ $(function() {
         "Tanda","Amritsar","Raipur","Pilani",
         "Bilaspur","Srinagar"
     ]
+    // var data2 =[];
+    // data2 = cities.filter(function(item){
+    //      return item !== 'Srinagar'
+    // })
 
+    // console.log("data2");
+    // console.log(data2);
+    
     function findMatches(wordToMatch){
         return cities.filter(item => item.toLowerCase().includes(wordToMatch.toLowerCase()))
     }
@@ -36,17 +43,16 @@ $(function() {
     
     $("input").each(function(){
         this.addEventListener('keyup', function(){
-
             if(($(this).val().length)>=2){
-
                 if($(this).hasClass("from")){
                     console.log("from block");
                     $(".from-div").empty();
                     appendData($(this).val(),".from-div")
                     var self = this;
-                    $(".search-result").click(function(){
+                    $(".search-result").click(function(e){
                         $(self).val($(this).text());
                         $(".from-div").empty();
+                        e.stopPropagation();
                     });
                 }
                 else{
@@ -57,11 +63,16 @@ $(function() {
                     $(".search-result").click(function(){
                         $(self).val($(this).text());
                         $(".to-div").empty();
+                        e.stopPropagation();
                     });
                 }
             }
         });
       });
+
+      $(document).click(function(){
+        $("p").hide();
+    });
 
    
 }); // DOCUMENT READY
